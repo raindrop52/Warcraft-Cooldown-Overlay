@@ -1,0 +1,16 @@
+# .NET build output
+**/bin/
+**/obj/
+
+# Local distribution output
+dist/
+
+# IDE and user settings
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Local diagnostics
+warcraft-interface-preview.png
+
