@@ -13,7 +13,10 @@ Warcraft III 프로즌 쓰론 창에서 인벤토리와 스킬 아이콘을 캡�
 
 ## 다운로드
 
-[최신 버전 다운로드](../../releases/latest)에서 `WarcraftCooldownOverlay.exe`를 클릭해 실행하세요. 별도의 .NET 설치가 필요하지 않습니다.
+[최신 버전 다운로드](../../releases/latest)에서 실행 파일을 내려받으세요. 두 버전 모두 별도의 .NET 설치가 필요하지 않으며 기능은 같습니다.
+
+- `WarcraftCooldownOverlay.exe`: 일반판
+- `WarcraftCooldownOverlay-Lightweight.exe`: 내부 런타임을 압축한 경량판. 첫 실행이 조금 느릴 수 있습니다.
 
 압축 해제나 설치 과정은 없습니다. EXE 파일 하나만 내려받아 실행하면 됩니다.
 

@@ -27,7 +27,7 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
-      - name: Publish standalone executable
+      - name: Publish standard standalone executable
         run: >-
           dotnet publish .\WarcraftCooldownOverlay\WarcraftCooldownOverlay.csproj
           -c Release
@@ -37,12 +37,32 @@ jobs:
           -p:IncludeNativeLibrariesForSelfExtract=true
           -p:DebugType=None
           -p:DebugSymbols=false
-          -o .\publish
+          -o .\publish\standard
+
+      - name: Publish lightweight compressed executable
+        run: >-
+          dotnet publish .\WarcraftCooldownOverlay\WarcraftCooldownOverlay.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:EnableCompressionInSingleFile=true
+          -p:DebugType=None
+          -p:DebugSymbols=false
+          -o .\publish\lightweight
+
+      - name: Prepare release files
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path .\artifacts -Force | Out-Null
+          Copy-Item .\publish\standard\WarcraftCooldownOverlay.exe .\artifacts\WarcraftCooldownOverlay.exe
+          Copy-Item .\publish\lightweight\WarcraftCooldownOverlay.exe .\artifacts\WarcraftCooldownOverlay-Lightweight.exe
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref_name }}
           generate_release_notes: true
-          files: publish/WarcraftCooldownOverlay.exe
+          files: artifacts/*.exe
 
